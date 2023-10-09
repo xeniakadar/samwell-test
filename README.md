@@ -46,7 +46,9 @@ Create a Next.js application to display a dashboard with mock user activity data
 - Implement error handling for invalid user IDs or missing data.
 - Ensure the layout is responsive.
 
-## Once you've completed the tasks:
+## Instructions for Submission
+
+Once you've completed the tasks:
 
 1. Commit and push your changes to your own GitHub repository.
 2. Make sure to provide read access to the GitHub handle `@tilen-babnik` so your solution can be reviewed.
