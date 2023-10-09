@@ -1,6 +1,6 @@
 # Next.js Test
 
-A test project simulating a SaaS dashboard using Next.js, TypeScript, and mock API routes.
+A test project simulating a dashboard using Next.js, TypeScript, and mock API routes.
 
 ## API Endpoints
 
@@ -20,14 +20,14 @@ A test project simulating a SaaS dashboard using Next.js, TypeScript, and mock A
    ```bash
    npm install
 
-
-
 ## Objective:
+
 Create a Next.js application to display a dashboard with mock user activity data, such as user signups, login activities, and subscription upgrades, fetched from mock API endpoints.
 
 ## Test Requirements:
 
-### **Dashboard Home Page (/):
+### **Dashboard Home Page (/):**
+
 - Display a summary showing the number of new signups, logins, and upgrades.
 - Display a list of recent user signups showcasing the user's name and signup date.
 - Each user name in the list should be clickable and redirect to a detailed activity page for the user.
