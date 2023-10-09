@@ -45,3 +45,13 @@ Create a Next.js application to display a dashboard with mock user activity data
 - Use getStaticProps or getServerSideProps appropriately for data fetching.
 - Implement error handling for invalid user IDs or missing data.
 - Ensure the layout is responsive.
+
+## Once you've completed the tasks:
+
+1. Commit and push your changes to your own GitHub repository.
+2. Make sure to provide read access to the GitHub handle `@tilen-babnik` so your solution can be reviewed.
+3. Send an email to `tilen@samwell.ai` with:
+   - A link to your GitHub repository containing the solution.
+   - Any additional notes or comments you'd like to add about your submission.
+
+Thank you for participating in this test! We're excited to review your work.
