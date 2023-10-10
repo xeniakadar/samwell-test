@@ -85,4 +85,45 @@ const UserList = styled.ul`
   }
 `;
 
-export { Container, Main, Title, Description, CodeTag, Summary, UserList };
+const StyledTable = styled.table`
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+
+  th,
+  td {
+    border: 1px solid #e0e0e0;
+    padding: 0.5rem;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f7f7f7;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  a {
+    color: ${({ theme }) => theme.colors.secondary};
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+`;
+
+export {
+  Container,
+  Main,
+  Title,
+  Description,
+  CodeTag,
+  Summary,
+  UserList,
+  StyledTable,
+};

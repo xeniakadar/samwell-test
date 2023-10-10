@@ -4,9 +4,9 @@ import {
   Main,
   Title,
   Description,
-  CodeTag,
   Summary,
   UserList,
+  StyledTable,
 } from "../components/sharedstyles";
 import Link from "next/link";
 import Cards from "../components/cards";
@@ -14,6 +14,8 @@ import Cards from "../components/cards";
 export async function getServerSideProps() {
   const signupsRes = await fetch("http://localhost:3000/api/signups");
   const signups = await signupsRes.json();
+
+  signups.sort((a, b) => b.signupDate.localeCompare(a.signupDate));
 
   const loginsRes = await fetch("http://localhost:3000/api/logins");
   const logins = await loginsRes.json();
@@ -34,27 +36,35 @@ export default function Home({ signups, logins, upgrades }) {
       </Head>
       <Main>
         <Title>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to the{" "}
+          <a href="https://github.com/samwellai/nextjs-test#nextjs-test">
+            Samwell AI Test!
+          </a>
         </Title>
-
-        <Description>
-          Get started by editing
-          <CodeTag>pages/index.tsx</CodeTag>
-        </Description>
 
         <Summary>
           <p>New Signups: {signups.length}</p>
           <p>Logins: {logins.length}</p>
           <p>Upgrades: {upgrades.length}</p>
         </Summary>
-        <UserList>
-          {signups.map((user) => (
-            <li key={user.id}>
-              <Link href={`/users/${user.id}`}>{user.name}</Link> -{" "}
-              {user.signupDate}
-            </li>
-          ))}
-        </UserList>
+        <StyledTable>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Signup Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {signups.map((user) => (
+              <tr key={user.id}>
+                <td>
+                  <Link href={`/users/${user.id}`}>{user.name}</Link>
+                </td>
+                <td>{user.signupDate}</td>
+              </tr>
+            ))}
+          </tbody>
+        </StyledTable>
 
         <Cards />
       </Main>

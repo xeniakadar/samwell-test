@@ -11,7 +11,6 @@ import Cards from "../../components/cards";
 export async function getServerSideProps(context) {
   const userId = parseInt(context.params.id, 10);
 
-  // Fetch all data
   const signupsRes = await fetch("http://localhost:3000/api/signups");
   const allSignups = await signupsRes.json();
 
@@ -21,14 +20,12 @@ export async function getServerSideProps(context) {
   const upgradesRes = await fetch("http://localhost:3000/api/upgrades");
   const allUpgrades = await upgradesRes.json();
 
-  // Filter the data for the particular user
   const userSignup = allSignups.find((signup) => signup.id === userId);
   const userLogins = allLogins.filter((login) => login.userId === userId);
   const userUpgrades = allUpgrades.filter(
     (upgrade) => upgrade.userId === userId
   );
 
-  // Check if user exists, otherwise redirect to 404 page
   if (!userSignup) {
     return {
       notFound: true,
