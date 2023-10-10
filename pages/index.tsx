@@ -1,14 +1,30 @@
-import Head from 'next/head'
+import Head from "next/head";
 import {
   Container,
   Main,
   Title,
   Description,
   CodeTag,
-} from '../components/sharedstyles'
-import Cards from '../components/cards'
+  Summary,
+  UserList,
+} from "../components/sharedstyles";
+import Link from "next/link";
+import Cards from "../components/cards";
 
-export default function Home() {
+export async function getServerSideProps() {
+  const signupsRes = await fetch("http://localhost:3000/api/signups");
+  const signups = await signupsRes.json();
+
+  const loginsRes = await fetch("http://localhost:3000/api/logins");
+  const logins = await loginsRes.json();
+
+  const upgradesRes = await fetch("http://localhost:3000/api/upgrades");
+  const upgrades = await upgradesRes.json();
+
+  return { props: { signups, logins, upgrades } };
+}
+
+export default function Home({ signups, logins, upgrades }) {
   return (
     <Container>
       <Head>
@@ -26,8 +42,22 @@ export default function Home() {
           <CodeTag>pages/index.tsx</CodeTag>
         </Description>
 
+        <Summary>
+          <p>New Signups: {signups.length}</p>
+          <p>Logins: {logins.length}</p>
+          <p>Upgrades: {upgrades.length}</p>
+        </Summary>
+        <UserList>
+          {signups.map((user) => (
+            <li key={user.id}>
+              <Link href={`/users/${user.id}`}>{user.name}</Link> -{" "}
+              {user.signupDate}
+            </li>
+          ))}
+        </UserList>
+
         <Cards />
       </Main>
     </Container>
-  )
+  );
 }
