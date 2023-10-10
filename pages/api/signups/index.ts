@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { Signup } from "../../../types/api";
 
 const signups = [
   {
@@ -28,6 +29,9 @@ const signups = [
   // ... add more mock users as desired
 ];
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Signup[]>
+) {
   res.status(200).json(signups);
 }

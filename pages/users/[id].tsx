@@ -6,23 +6,51 @@ import {
   Description,
 } from "../../components/sharedstyles";
 import Link from "next/link";
-import Cards from "../../components/cards";
+import { GetServerSidePropsContext } from "next";
 
-export async function getServerSideProps(context) {
-  const userId = parseInt(context.params.id, 10);
+import { Signup, Login, Upgrade } from "../../types/api";
 
-  const signupsRes = await fetch("http://localhost:3000/api/signups");
-  const allSignups = await signupsRes.json();
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const paramId = context.params.id;
+  const userId = typeof paramId === "string" ? parseInt(paramId, 10) : null;
+  if (!userId) {
+    return {
+      notFound: true,
+    };
+  }
 
-  const loginsRes = await fetch("http://localhost:3000/api/logins");
-  const allLogins = await loginsRes.json();
+  const fetchAndHandleError = async (url: string) => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from ${url}`);
+    }
+    return response.json();
+  };
 
-  const upgradesRes = await fetch("http://localhost:3000/api/upgrades");
-  const allUpgrades = await upgradesRes.json();
+  let allSignups: Signup[] = [];
+  let allLogins: Login[] = [];
+  let allUpgrades: Upgrade[] = [];
 
-  const userSignup = allSignups.find((signup) => signup.id === userId);
-  const userLogins = allLogins.filter((login) => login.userId === userId);
-  const userUpgrades = allUpgrades.filter(
+  try {
+    allSignups = await fetchAndHandleError("http://localhost:3000/api/signups");
+    allLogins = await fetchAndHandleError("http://localhost:3000/api/logins");
+    allUpgrades = await fetchAndHandleError(
+      "http://localhost:3000/api/upgrades"
+    );
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      notFound: true,
+    };
+  }
+
+  const userSignup: Signup | undefined = allSignups.find(
+    (signup) => signup.id === userId
+  );
+  const userLogins: Login[] = allLogins.filter(
+    (login) => login.userId === userId
+  );
+  const userUpgrades: Upgrade[] = allUpgrades.filter(
     (upgrade) => upgrade.userId === userId
   );
 
@@ -41,7 +69,17 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function UserActivityPage({ userSignup, logins, upgrades }) {
+interface UserActivityProps {
+  userSignup: Signup;
+  logins: Login[];
+  upgrades: Upgrade[];
+}
+
+export default function UserActivityPage({
+  userSignup,
+  logins,
+  upgrades,
+}: UserActivityProps) {
   return (
     <Container>
       <Main>
@@ -52,8 +90,8 @@ export default function UserActivityPage({ userSignup, logins, upgrades }) {
         <h2>Login Activities</h2>
         <ul>
           {logins.length ? (
-            logins.map((login, index) => (
-              <li key={index}>
+            logins.map((login) => (
+              <li key={login.userId}>
                 {login.date} - {login.device}
               </li>
             ))
@@ -64,11 +102,15 @@ export default function UserActivityPage({ userSignup, logins, upgrades }) {
 
         <h2>Subscription Upgrades</h2>
         <ul>
-          {upgrades.map((upgrade, index) => (
-            <li key={index}>
-              {upgrade.oldPlan} to {upgrade.newPlan} on {upgrade.upgradeDate}
-            </li>
-          ))}
+          {upgrades.length ? (
+            upgrades.map((upgrade) => (
+              <li key={upgrade.userId}>
+                {upgrade.oldPlan} to {upgrade.newPlan} on {upgrade.upgradeDate}
+              </li>
+            ))
+          ) : (
+            <h3>No upgrades yet</h3>
+          )}
         </ul>
       </Main>
       <Description>

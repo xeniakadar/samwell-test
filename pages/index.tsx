@@ -3,30 +3,49 @@ import {
   Container,
   Main,
   Title,
-  Description,
   Summary,
-  UserList,
   StyledTable,
 } from "../components/sharedstyles";
 import Link from "next/link";
 import Cards from "../components/cards";
+import { Signup, Login, Upgrade } from "../types/api";
+
+interface HomeProps {
+  signups: Signup[];
+  logins: Login[];
+  upgrades: Upgrade[];
+}
 
 export async function getServerSideProps() {
-  const signupsRes = await fetch("http://localhost:3000/api/signups");
-  const signups = await signupsRes.json();
+  const fetchAndHandleError = async (url: string) => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data from ${url}`);
+    }
+    return response.json();
+  };
 
-  signups.sort((a, b) => b.signupDate.localeCompare(a.signupDate));
+  let signups: Signup[] = [];
+  let logins: Login[] = [];
+  let upgrades: Upgrade[] = [];
 
-  const loginsRes = await fetch("http://localhost:3000/api/logins");
-  const logins = await loginsRes.json();
+  try {
+    signups = await fetchAndHandleError("http://localhost:3000/api/signups");
+    logins = await fetchAndHandleError("http://localhost:3000/api/logins");
+    upgrades = await fetchAndHandleError("http://localhost:3000/api/upgrades");
 
-  const upgradesRes = await fetch("http://localhost:3000/api/upgrades");
-  const upgrades = await upgradesRes.json();
+    signups.sort((a, b) => b.signupDate.localeCompare(a.signupDate));
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      notFound: true,
+    };
+  }
 
   return { props: { signups, logins, upgrades } };
 }
 
-export default function Home({ signups, logins, upgrades }) {
+export default function Home({ signups, logins, upgrades }: HomeProps) {
   return (
     <Container>
       <Head>
