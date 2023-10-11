@@ -5,10 +5,12 @@ import {
   Title,
   Summary,
   StyledTable,
+  DashCard,
 } from "../components/sharedstyles";
 import Link from "next/link";
 import Cards from "../components/cards";
 import { Signup, Login, Upgrade } from "../types/api";
+import { FaStar, FaUser, FaArrowUp } from "react-icons/fa";
 
 interface HomeProps {
   signups: Signup[];
@@ -61,11 +63,29 @@ export default function Home({ signups, logins, upgrades }: HomeProps) {
           </a>
         </Title>
 
-        <Summary>
-          <p>New Signups: {signups.length}</p>
-          <p>Logins: {logins.length}</p>
-          <p>Upgrades: {upgrades.length}</p>
-        </Summary>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <DashCard>
+            <div>
+              <h3>{signups.length}</h3>
+              <p>New Signups</p>
+            </div>
+            <FaUser />
+          </DashCard>
+          <DashCard>
+            <div>
+              <h3>{logins.length}</h3>
+              <p>Logins</p>
+            </div>
+            <FaArrowUp />
+          </DashCard>
+          <DashCard>
+            <div>
+              <h3>{upgrades.length}</h3>
+              <p>Upgrades</p>
+            </div>
+            <FaStar />
+          </DashCard>
+        </div>
         <StyledTable>
           <thead>
             <tr>
@@ -84,8 +104,6 @@ export default function Home({ signups, logins, upgrades }: HomeProps) {
             ))}
           </tbody>
         </StyledTable>
-
-        <Cards />
       </Main>
     </Container>
   );

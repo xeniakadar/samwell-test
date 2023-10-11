@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FaStar, FaUser, FaArrowUp } from "react-icons/fa";
 
 const Container = styled.div`
   padding: 0 0.5rem;
@@ -24,6 +25,10 @@ const Title = styled.h1`
   font-size: 4rem;
   text-align: center;
   text-decoration: none;
+
+  @media (max-width: 600px) {
+    font-size: 3rem;
+  }
 
   a {
     color: ${({ theme }) => theme.colors.secondary};
@@ -85,25 +90,108 @@ const UserList = styled.ul`
   }
 `;
 
+const DashCard = styled.div`
+  background: #3498db;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 179px;
+  color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  @media (max-width: 600px) {
+    width: calc(100% - 2rem);
+  }
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  svg {
+    font-size: 2rem;
+  }
+`;
+
+const InfoCard = styled.div`
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 600px) {
+    max-width: 100%;
+  }
+
+  h2 {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    margin: 1rem 0;
+    color: #555;
+  }
+`;
+
+const BoldText = styled.span`
+  font-weight: bold;
+`;
+
 const StyledTable = styled.table`
   width: 100%;
   max-width: 600px;
   border-collapse: collapse;
   margin-bottom: 2rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 600px) {
+    max-width: 100%;
+    th,
+    td {
+      padding: 0.25rem;
+    }
+  }
 
   th,
   td {
-    border: 1px solid #e0e0e0;
     padding: 0.5rem;
     text-align: left;
   }
 
   th {
-    background-color: #f7f7f7;
+    background-color: #3498db;
+    color: white;
   }
 
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
+  tr {
+    border-bottom: 1px solid #e0e0e0;
+
+    &:last-child {
+      border-bottom: none;
+    }
   }
 
   a {
@@ -117,6 +205,19 @@ const StyledTable = styled.table`
   }
 `;
 
+const Avatar = styled.div`
+  background-color: #3498db;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 1rem;
+`;
+
 export {
   Container,
   Main,
@@ -126,4 +227,8 @@ export {
   Summary,
   UserList,
   StyledTable,
+  DashCard,
+  InfoCard,
+  Avatar,
+  BoldText,
 };

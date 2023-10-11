@@ -4,6 +4,10 @@ import {
   Main,
   Title,
   Description,
+  InfoCard,
+  Avatar,
+  StyledTable,
+  BoldText,
 } from "../../components/sharedstyles";
 import Link from "next/link";
 import { GetServerSidePropsContext } from "next";
@@ -75,6 +79,13 @@ interface UserActivityProps {
   upgrades: Upgrade[];
 }
 
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("");
+}
+
 export default function UserActivityPage({
   userSignup,
   logins,
@@ -83,39 +94,57 @@ export default function UserActivityPage({
   return (
     <Container>
       <Main>
-        <Title>{userSignup.name}</Title>
-        <p>Email: {userSignup.email}</p>
-        <p>Signup Date: {userSignup.signupDate}</p>
+        <Description>
+          <Link href="/">&larr; Go Back</Link>
+        </Description>
+        <InfoCard>
+          <Avatar>{getInitials(userSignup.name)}</Avatar>
+          <Title>{userSignup.name}</Title>
+          <p>
+            <BoldText>Email:</BoldText> {userSignup.email}
+          </p>
+          <p>
+            <BoldText>Signup Date:</BoldText> {userSignup.signupDate}
+          </p>
+        </InfoCard>
 
-        <h2>Login Activities</h2>
-        <ul>
+        <InfoCard>
+          <h2>Login Activities</h2>
           {logins.length ? (
-            logins.map((login) => (
-              <li key={login.userId}>
-                {login.date} - {login.device}
-              </li>
-            ))
+            <StyledTable>
+              <thead>
+                <tr>
+                  <th>Login Date</th>
+                  <th>Device</th>
+                </tr>
+              </thead>
+              <tbody>
+                {logins.map((login) => (
+                  <tr key={login.userId}>
+                    <td>{login.date}</td>
+                    <td>{login.device}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </StyledTable>
           ) : (
             <h3>No logins yet</h3>
           )}
-        </ul>
+        </InfoCard>
 
-        <h2>Subscription Upgrades</h2>
-        <ul>
+        <InfoCard>
+          <h2>Subscription Upgrades</h2>
           {upgrades.length ? (
             upgrades.map((upgrade) => (
-              <li key={upgrade.userId}>
+              <p key={upgrade.userId}>
                 {upgrade.oldPlan} to {upgrade.newPlan} on {upgrade.upgradeDate}
-              </li>
+              </p>
             ))
           ) : (
             <h3>No upgrades yet</h3>
           )}
-        </ul>
+        </InfoCard>
       </Main>
-      <Description>
-        <Link href="/">&larr; Go Back</Link>
-      </Description>
     </Container>
   );
 }
