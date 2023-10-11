@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FaStar, FaUser, FaArrowUp } from "react-icons/fa";
 
 const Container = styled.div`
   padding: 0 0.5rem;

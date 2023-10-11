@@ -21,7 +21,7 @@ const ErrorPage: React.FC<ErrorProps> = ({ statusCode }) => {
             ? "The user you're looking for does not exist."
             : "An unexpected error has occurred."}
         </Description>
-        <Link href="/">Go Home</Link>
+        <Link href="/">Go Back</Link>
       </Main>
     </Container>
   );
