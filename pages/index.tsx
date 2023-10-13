@@ -137,9 +137,6 @@ export default function Home({ signups, logins, upgrades }: HomeProps) {
             Samwell AI Test!
           </a>
         </Title>
-
-        {/* <button onClick={() => setSelectedRange("week")}>Last Week</button>
-        <button onClick={() => setSelectedRange("month")}>Last Month</button> */}
         <InfoCard>
           <UserChart data={displayedData} />
           <ButtonsContainer>

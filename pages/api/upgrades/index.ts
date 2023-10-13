@@ -8,8 +8,15 @@ const upgrades = [
     newPlan: "Premium",
     upgradeDate: "2023-10-04",
   },
+  {
+    userId: 8,
+    oldPlan: "Basic",
+    newPlan: "Premium",
+    upgradeDate: "2023-10-04",
+  },
   { userId: 3, oldPlan: "Basic", newPlan: "Pro", upgradeDate: "2023-09-22" },
   { userId: 6, oldPlan: "Basic", newPlan: "Pro", upgradeDate: "2023-09-22" },
+  { userId: 7, oldPlan: "Basic", newPlan: "Pro", upgradeDate: "2023-09-22" },
   // ... add more mock upgrade activities as desired
 ];
 
