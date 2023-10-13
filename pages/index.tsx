@@ -6,6 +6,7 @@ import {
   Summary,
   StyledTable,
   DashCard,
+  DashCardContainer,
 } from "../components/sharedstyles";
 import Link from "next/link";
 import Cards from "../components/cards";
@@ -63,7 +64,7 @@ export default function Home({ signups, logins, upgrades }: HomeProps) {
           </a>
         </Title>
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <DashCardContainer>
           <DashCard>
             <div>
               <h3>{signups.length}</h3>
@@ -85,7 +86,7 @@ export default function Home({ signups, logins, upgrades }: HomeProps) {
             </div>
             <FaStar />
           </DashCard>
-        </div>
+        </DashCardContainer>
         <StyledTable>
           <thead>
             <tr>

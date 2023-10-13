@@ -89,11 +89,22 @@ const UserList = styled.ul`
   }
 `;
 
+const DashCardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
 const DashCard = styled.div`
   background: ${({ theme }) => theme.colors.secondary};
   border-radius: 8px;
   padding: 1rem;
-  margin: 1rem;
+  margin: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -103,7 +114,8 @@ const DashCard = styled.div`
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   @media (max-width: 600px) {
-    width: calc(100% - 2rem);
+    width: 100%;
+    margin: 0.5rem 0;
   }
 
   &:hover {
@@ -160,14 +172,15 @@ const BoldText = styled.span`
 `;
 
 const StyledTable = styled.table`
-  width: 100%;
-  max-width: 600px;
+  width: 100%; // set default width to 100%
+  max-width: 800px; // Increase max-width if you want a wider table on larger screens
+  min-width: 250px; // You can keep the min-width or adjust as per your preference
   border-collapse: collapse;
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem; // center the table on larger screens
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
 
   @media (max-width: 600px) {
-    max-width: 100%;
     th,
     td {
       padding: 0.25rem;
@@ -230,4 +243,5 @@ export {
   InfoCard,
   Avatar,
   BoldText,
+  DashCardContainer,
 };
