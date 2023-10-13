@@ -11,8 +11,9 @@ import {
 } from "../../components/sharedstyles";
 import Link from "next/link";
 import { GetServerSidePropsContext } from "next";
-
 import { Signup, Login, Upgrade } from "../../types/api";
+
+const BASE_URL = process.env.LOCAL_HOST || "http://localhost:3000";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const paramId = context.params.id;
@@ -36,11 +37,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let allUpgrades: Upgrade[] = [];
 
   try {
-    allSignups = await fetchAndHandleError("http://localhost:3000/api/signups");
-    allLogins = await fetchAndHandleError("http://localhost:3000/api/logins");
-    allUpgrades = await fetchAndHandleError(
-      "http://localhost:3000/api/upgrades"
-    );
+    allSignups = await fetchAndHandleError(`${BASE_URL}/api/signups`);
+    allLogins = await fetchAndHandleError(`${BASE_URL}/api/logins`);
+    allUpgrades = await fetchAndHandleError(`${BASE_URL}/api/upgrades`);
   } catch (error) {
     console.error("Error fetching data:", error);
     return {

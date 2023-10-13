@@ -15,6 +15,8 @@ import { FaStar, FaUser, FaArrowUp } from "react-icons/fa";
 import UserChart from "../components/UserChart";
 import { useState } from "react";
 
+const BASE_URL = process.env.LOCAL_HOST || "http://localhost:3000";
+
 interface HomeProps {
   signups: Signup[];
   logins: Login[];
@@ -35,9 +37,9 @@ export async function getServerSideProps() {
   let upgrades: Upgrade[] = [];
 
   try {
-    signups = await fetchAndHandleError("http://localhost:3000/api/signups");
-    logins = await fetchAndHandleError("http://localhost:3000/api/logins");
-    upgrades = await fetchAndHandleError("http://localhost:3000/api/upgrades");
+    signups = await fetchAndHandleError(`${BASE_URL}/api/signups`);
+    logins = await fetchAndHandleError(`${BASE_URL}/api/logins`);
+    upgrades = await fetchAndHandleError(`${BASE_URL}/api/upgrades`);
 
     signups.sort((a, b) => b.signupDate.localeCompare(a.signupDate));
   } catch (error) {
