@@ -90,7 +90,7 @@ const UserList = styled.ul`
 `;
 
 const DashCard = styled.div`
-  background: #3498db;
+  background: ${({ theme }) => theme.colors.secondary};
   border-radius: 8px;
   padding: 1rem;
   margin: 1rem;
@@ -181,7 +181,7 @@ const StyledTable = styled.table`
   }
 
   th {
-    background-color: #3498db;
+    background-color: ${({ theme }) => theme.colors.secondary};
     color: white;
   }
 
@@ -205,7 +205,7 @@ const StyledTable = styled.table`
 `;
 
 const Avatar = styled.div`
-  background-color: #3498db;
+  background-color: ${({ theme }) => theme.colors.secondary};
   border-radius: 50%;
   width: 80px;
   height: 80px;
