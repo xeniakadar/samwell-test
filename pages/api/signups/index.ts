@@ -26,6 +26,12 @@ const signups = [
     email: "nnew@example.com",
     signupDate: "2023-10-10",
   },
+  {
+    id: 5,
+    name: "Bob Lance",
+    email: "bob@example.com",
+    signupDate: "2023-10-10",
+  },
   // ... add more mock users as desired
 ];
 

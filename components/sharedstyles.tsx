@@ -14,14 +14,13 @@ const Main = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 
 const Title = styled.h1`
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 2.5rem;
   text-align: center;
   text-decoration: none;
 

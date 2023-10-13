@@ -3,15 +3,15 @@ import {
   Container,
   Main,
   Title,
-  Summary,
   StyledTable,
   DashCard,
   DashCardContainer,
 } from "../components/sharedstyles";
 import Link from "next/link";
-import Cards from "../components/cards";
 import { Signup, Login, Upgrade } from "../types/api";
 import { FaStar, FaUser, FaArrowUp } from "react-icons/fa";
+import UserChart from "../components/UserChart";
+import { useState } from "react";
 
 interface HomeProps {
   signups: Signup[];
@@ -48,7 +48,73 @@ export async function getServerSideProps() {
   return { props: { signups, logins, upgrades } };
 }
 
+const getFilteredData = (
+  data: { [key: string]: number },
+  range: "week" | "month"
+) => {
+  const endDate = new Date();
+  let startDate = new Date();
+
+  if (range === "week") {
+    startDate.setDate(endDate.getDate() - 7);
+  } else if (range === "month") {
+    startDate.setMonth(endDate.getMonth() - 1);
+  }
+
+  const filteredData: { [key: string]: number } = {};
+  Object.keys(data).forEach((date) => {
+    const currentDate = new Date(date);
+    if (currentDate >= startDate && currentDate <= endDate) {
+      filteredData[date] = data[date];
+    }
+  });
+
+  return filteredData;
+};
+
 export default function Home({ signups, logins, upgrades }: HomeProps) {
+  // Chart related stuff
+  const [selectedRange, setSelectedRange] = useState<"week" | "month">("week");
+  // sorting dates
+  const sortedSignupsForChart = [...signups].sort((a, b) =>
+    a.signupDate.localeCompare(b.signupDate)
+  );
+  // aggregate signups
+  const aggregatedSignups = sortedSignupsForChart.reduce((acc, signup) => {
+    const date = signup.signupDate;
+    if (acc[date]) {
+      acc[date]++;
+    } else {
+      acc[date] = 1;
+    }
+    return acc;
+  }, {} as { [key: string]: number });
+
+  const getDatesBetween = (startDate: string, endDate: string): string[] => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const dates = [];
+
+    while (start <= end) {
+      dates.push(start.toISOString().split("T")[0]);
+      start.setDate(start.getDate() + 1);
+    }
+
+    return dates;
+  };
+
+  const allDates = getDatesBetween(
+    sortedSignupsForChart[0].signupDate,
+    sortedSignupsForChart[sortedSignupsForChart.length - 1].signupDate
+  );
+
+  const completeData = allDates.reduce((acc, date) => {
+    acc[date] = aggregatedSignups[date] || 0;
+    return acc;
+  }, {} as { [key: string]: number });
+
+  const displayedData = getFilteredData(completeData, selectedRange);
+
   return (
     <Container>
       <Head>
@@ -63,6 +129,11 @@ export default function Home({ signups, logins, upgrades }: HomeProps) {
             Samwell AI Test!
           </a>
         </Title>
+
+        <button onClick={() => setSelectedRange("week")}>Last Week</button>
+        <button onClick={() => setSelectedRange("month")}>Last Month</button>
+
+        <UserChart data={displayedData} />
 
         <DashCardContainer>
           <DashCard>
