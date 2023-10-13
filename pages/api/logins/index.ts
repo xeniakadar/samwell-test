@@ -6,6 +6,9 @@ const logins = [
   { userId: 1, date: "2023-10-02", device: "Mobile" },
   { userId: 2, date: "2023-09-28", device: "Tablet" },
   { userId: 2, date: "2023-09-28", device: "Tablet" },
+  { userId: 8, date: "2023-09-28", device: "Mobile" },
+  { userId: 8, date: "2023-09-28", device: "Desktop" },
+  { userId: 6, date: "2023-09-28", device: "Desktop" },
   // ... add more mock login activities as desired
 ];
 

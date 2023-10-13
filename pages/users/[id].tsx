@@ -137,7 +137,8 @@ export default function UserActivityPage({
           {upgrades.length ? (
             upgrades.map((upgrade) => (
               <p key={upgrade.userId}>
-                {upgrade.oldPlan} to {upgrade.newPlan} on {upgrade.upgradeDate}
+                <BoldText>{upgrade.oldPlan}</BoldText> to{" "}
+                <BoldText>{upgrade.newPlan}</BoldText> on {upgrade.upgradeDate}
               </p>
             ))
           ) : (
