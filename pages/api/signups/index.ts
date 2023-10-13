@@ -22,7 +22,7 @@ const signups = [
   },
   {
     id: 4,
-    name: "New user",
+    name: "Roger Federer",
     email: "nnew@example.com",
     signupDate: "2023-10-10",
   },
@@ -31,6 +31,24 @@ const signups = [
     name: "Bob Lance",
     email: "bob@example.com",
     signupDate: "2023-10-10",
+  },
+  {
+    id: 6,
+    name: "Rafael Nadal",
+    email: "bob@example.com",
+    signupDate: "2023-10-11",
+  },
+  {
+    id: 7,
+    name: "John Adams",
+    email: "bob@example.com",
+    signupDate: "2023-10-11",
+  },
+  {
+    id: 8,
+    name: "Cody Lance",
+    email: "bob@example.com",
+    signupDate: "2023-10-11",
   },
   // ... add more mock users as desired
 ];

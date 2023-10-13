@@ -10,7 +10,7 @@ const Container = styled.div`
   min-height: 100vh;
 `;
 const Main = styled.main`
-  padding: 5rem 0;
+  padding: 1rem;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@ const Title = styled.h1`
   text-decoration: none;
 
   @media (max-width: 600px) {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   a {
@@ -199,9 +199,19 @@ const StyledTable = styled.table`
 
   tr {
     border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease;
 
     &:last-child {
       border-bottom: none;
+      background-color: #f5f5f5;
+
+      &:hover {
+        background-color: white;
+      }
+    }
+
+    &:hover {
+      background-color: white;
     }
   }
 

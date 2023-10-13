@@ -73,12 +73,18 @@ const getFilteredData = (
 };
 
 export default function Home({ signups, logins, upgrades }: HomeProps) {
-  // Chart related stuff
+  // chart week or month
   const [selectedRange, setSelectedRange] = useState<"week" | "month">("week");
+  // show more table
+  const [isTableExpanded, setIsTableExpanded] = useState(false);
+
   // sorting dates
   const sortedSignupsForChart = [...signups].sort((a, b) =>
     a.signupDate.localeCompare(b.signupDate)
   );
+
+  const displayedSignups = isTableExpanded ? signups : signups.slice(0, 5);
+
   // aggregate signups
   const aggregatedSignups = sortedSignupsForChart.reduce((acc, signup) => {
     const date = signup.signupDate;
@@ -166,7 +172,7 @@ export default function Home({ signups, logins, upgrades }: HomeProps) {
             </tr>
           </thead>
           <tbody>
-            {signups.map((user) => (
+            {displayedSignups.map((user) => (
               <tr key={user.id}>
                 <td>
                   <Link href={`/users/${user.id}`}>{user.name}</Link>
@@ -174,6 +180,15 @@ export default function Home({ signups, logins, upgrades }: HomeProps) {
                 <td>{user.signupDate}</td>
               </tr>
             ))}
+            <tr>
+              <td
+                colSpan={2}
+                style={{ textAlign: "center", cursor: "pointer" }}
+                onClick={() => setIsTableExpanded(!isTableExpanded)}
+              >
+                {isTableExpanded ? "Show Less" : "Show More"}
+              </td>
+            </tr>
           </tbody>
         </StyledTable>
       </Main>

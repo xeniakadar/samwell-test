@@ -34,7 +34,7 @@ const UserChart: React.FC<UserChartProps> = ({ data }) => {
             label: "Signups",
             data: Object.values(data),
             fill: false,
-            borderColor: "rgb(75, 192, 192)",
+            borderColor: "#0073cf",
             tension: 0.1,
           },
         ],
