@@ -6,7 +6,9 @@ import {
   StyledTable,
   DashCard,
   DashCardContainer,
+  InfoCard,
 } from "../components/sharedstyles";
+import { Button, ButtonsContainer } from "../components/Button";
 import Link from "next/link";
 import { Signup, Login, Upgrade } from "../types/api";
 import { FaStar, FaUser, FaArrowUp } from "react-icons/fa";
@@ -136,11 +138,26 @@ export default function Home({ signups, logins, upgrades }: HomeProps) {
           </a>
         </Title>
 
-        <button onClick={() => setSelectedRange("week")}>Last Week</button>
-        <button onClick={() => setSelectedRange("month")}>Last Month</button>
+        {/* <button onClick={() => setSelectedRange("week")}>Last Week</button>
+        <button onClick={() => setSelectedRange("month")}>Last Month</button> */}
+        <InfoCard>
+          <UserChart data={displayedData} />
+          <ButtonsContainer>
+            <Button
+              isActive={selectedRange === "week"}
+              onClick={() => setSelectedRange("week")}
+            >
+              Last Week
+            </Button>
 
-        <UserChart data={displayedData} />
-
+            <Button
+              isActive={selectedRange === "month"}
+              onClick={() => setSelectedRange("month")}
+            >
+              Last Month
+            </Button>
+          </ButtonsContainer>
+        </InfoCard>
         <DashCardContainer>
           <DashCard>
             <div>
