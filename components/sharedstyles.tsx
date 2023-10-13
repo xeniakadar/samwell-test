@@ -108,14 +108,14 @@ const DashCard = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 179px;
+  width: 190px;
   color: white;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   @media (max-width: 600px) {
     width: 100%;
-    margin: 0.5rem 0;
+    margin: 0.5rem;
   }
 
   &:hover {
@@ -172,11 +172,11 @@ const BoldText = styled.span`
 `;
 
 const StyledTable = styled.table`
-  width: 100%; // set default width to 100%
-  max-width: 800px; // Increase max-width if you want a wider table on larger screens
-  min-width: 250px; // You can keep the min-width or adjust as per your preference
+  width: 100%;
+  max-width: 600px;
+  min-width: 250px;
   border-collapse: collapse;
-  margin: 0 auto 2rem; // center the table on larger screens
+  margin: 0 auto 2rem;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   overflow-x: auto;
 
